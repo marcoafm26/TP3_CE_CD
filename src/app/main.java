@@ -65,8 +65,16 @@ public class main {
       for(int i = 0; i < NUM_INDIVIDUOS; i++){
 
         int r1 = random.nextInt(0,NUM_INDIVIDUOS-1);
+
         int r2 = random.nextInt(0,NUM_INDIVIDUOS-1);
+        while (r2 == r1){
+          r2 = random.nextInt(0,NUM_INDIVIDUOS-1);
+        }
+
         int r3 = random.nextInt(0,NUM_INDIVIDUOS-1);
+        while (r3 == r1 || r3 == r2){
+          r3 = random.nextInt(0,NUM_INDIVIDUOS-1);
+        }
 
         Individuo u = new Individuo(QTD_GENES,QTD_AVALIACAO);
         u.gerarIndividuo(individuos,r1,r2,r3,F);
@@ -121,7 +129,7 @@ public class main {
   public static Individuo recombinar(Individuo individuo, Individuo u, double Cr, int QTD_GENES,int QTD_AVALIACAO){
     Individuo filho = new Individuo(QTD_GENES,QTD_AVALIACAO);
     for(int i = 0; i < individuo.genes.length ; i++){
-      double r = new Random().nextDouble(0,1);
+      double r = new Random().nextDouble();
       if(r < Cr){
         filho.genes[i] = individuo.genes[i];
       }else{
